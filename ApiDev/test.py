@@ -1,5 +1,5 @@
 import weiboCrawl
 import time
-# result = weiboCrawl.obtainWeiboHotSearch()
+result = weiboCrawl.obtainWeiboHotSearch()
 
-print(time.time())
+print(result)
