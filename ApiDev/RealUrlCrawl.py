@@ -10,7 +10,7 @@ import sys
 from bs4 import NavigableString
 from bs4 import Tag
 import codecs
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='utf-8')
+#sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='utf-8')
 
 # http://www.ijiandao.com/hot/media/douyin/602777c4774c49741e84dca7.html
 def obtainRealUrl( destUrl ):
