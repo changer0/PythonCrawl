@@ -2,8 +2,8 @@ from flask import Flask, request
 
 import json
 
-import weiboCrawl
-
+import WeiboCrawl
+import RealUrlCrawl
 import time
 
 app = Flask(__name__)
@@ -12,22 +12,38 @@ app = Flask(__name__)
 def hotSearch():
     # 默认返回内容
     return_dict= {'code': 200, 'msg': '处理成功',  "expired_time": -1, 'time_stamp': -1, 'result': False}
-    
-    # 获取传入的params参数
-    get_data=request.args.to_dict()
-    index=get_data.get('index')
-
-    result = weiboCrawl.obtainWeiboHotSearch()
+    result = WeiboCrawl.obtainWeiboHotSearch()
     if len(result) > 0:
         result.pop(0)
         return_dict['result']=result
     else:
         return_dict['msg']="微博爬取失败！"
         return_dict['code']=-1
+
     # 过期时间，用于做客户端缓存 毫秒单位, 目前过期时间为 10s
     return_dict['expired_time'] = (time.time() + 10) * 1000
     return_dict['time_stamp'] = time.time() * 1000
     
+    return json.dumps(return_dict, ensure_ascii=False)
+
+@app.route('/obtainRealUrl',methods=["GET"])
+def obtainRealUrl():
+    # 获取传入的params参数
+    get_data=request.args.to_dict()
+    destUrl=get_data.get('destUrl')
+    # 默认返回内容
+    return_dict= {'code': 200, 'msg': '处理成功',  'url': '', 'test':''}
+    if (destUrl == None or destUrl == ''):
+        return_dict['code']=-1
+        return_dict['msg']="destUrl 为空"
+    else:
+        try:
+            return_dict['test'] = destUrl
+            return_dict['url'] = RealUrlCrawl.obtainRealUrl(destUrl)
+        except:
+            return_dict['msg']="爬取发生异常"
+
+
     return json.dumps(return_dict, ensure_ascii=False)
 
 if __name__ == '__main__':

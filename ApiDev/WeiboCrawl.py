@@ -17,14 +17,15 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='utf-8')
 def obtainWeiboHotSearch():
 
     new_headers = {
-        "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.40 Safari/537.36 Edg/89.0.774.23"
+        "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.47 Safari/537.36 Edg/89.0.774.27"
     }
 
     # 爬取的网页链接
     r= requests.get("https://s.weibo.com/top/summary?cate=realtimehot/",headers = new_headers)
     # 类型
     # print(type(r))
-    print("状态码：" + str(r.status_code))
+    # print("状态码：")
+    # print(r.status_code)
     # 中文显示
     # r.encoding='utf-8'
     # r.encoding=None
