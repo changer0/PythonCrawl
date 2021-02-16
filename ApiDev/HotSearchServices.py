@@ -25,10 +25,8 @@ def hotSearch():
 
     if type == "weibo":
         result = WeiboCrawl.obtainWeiboHotSearch()
-    elif type == "douyin":
-        result = IjiandaoCrawl.obtainHotSearch()
     else:
-        result = WeiboCrawl.obtainWeiboHotSearch()
+        result = IjiandaoCrawl.obtainHotSearch(type)
 
 
     if len(result) > 0:

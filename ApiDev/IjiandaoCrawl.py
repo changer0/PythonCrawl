@@ -13,14 +13,14 @@ import codecs
 
 
 # 获取微博热搜
-def obtainHotSearch():
+def obtainHotSearch( type ):
 
     new_headers = {
         "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.47 Safari/537.36 Edg/89.0.774.27"
     }
 
     # 爬取的网页链接
-    r= requests.get("http://www.ijiandao.com/hot/media/douyin",headers = new_headers)
+    r= requests.get("http://www.ijiandao.com/hot/media/" + type,headers = new_headers)
     # 类型
     # print(type(r))
     # print("状态码：")
