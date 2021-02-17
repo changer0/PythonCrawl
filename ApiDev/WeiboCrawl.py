@@ -59,7 +59,7 @@ def obtainWeiboHotSearch():
         
         # ret.append(str(type(c1)))
         itemData = {
-            'url': '',
+            'realUrl': '',
             'title': '',
             'hotNum': '',
             'tag': '',
@@ -77,7 +77,7 @@ def obtainWeiboHotSearch():
                 #print('标题：', c2.a.string)
                 itemData['title'] = c2.a.string
                 #print('链接：', c2.a.attrs["href"])
-                itemData['url'] = url + c2.a.attrs["href"]
+                itemData['realUrl'] = url + c2.a.attrs["href"]
                 if (c2.span != None): 
                     #print('热度：', c2.span.string)
                     itemData['hotNum'] = c2.span.string

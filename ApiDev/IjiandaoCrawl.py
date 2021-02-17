@@ -40,6 +40,7 @@ def obtainHotSearch( type ):
     ret = []
 
     url = "http://www.ijiandao.com"
+    baiduDomain = "https://m.baidu.com/s?word="
 
     for c1 in soup.find('ul', class_='hot_new_list hot_classify'):
         if (c1==-1 or c1 == None or not isinstance(c1, Tag)):
@@ -68,7 +69,11 @@ def obtainHotSearch( type ):
                 #url 标题
                 #print("标题：", c2.a.string)
                 itemData['title'] = c2.a.string
-                itemData['url'] = url + c2.a.attrs["href"]
+
+                if type == "baidu":
+                    itemData['realUrl'] = baiduDomain + c2.a.string
+                else:
+                    itemData['url'] = url + c2.a.attrs["href"]
             elif c2Index == 2:
                 #热度
                 #print("标题：", c2.string)
