@@ -9,7 +9,7 @@ import time
 
 app = Flask(__name__)
 
-@app.route('/hotSearch',methods=["GET"])
+@app.route('/hotSearch/list',methods=["GET"])
 def hotSearch():
     # 默认返回内容
     return_dict= {'code': 200, 'msg': '处理成功',  "expired_time": -1, 'time_stamp': -1, 'type': 'weibo', 'result': False}
@@ -43,7 +43,7 @@ def hotSearch():
     
     return json.dumps(return_dict, ensure_ascii=False)
 
-@app.route('/obtainRealUrl',methods=["GET"])
+@app.route('/hotSearch/obtainRealUrl',methods=["GET"])
 def obtainRealUrl():
     # 获取传入的params参数
     get_data=request.args.to_dict()
