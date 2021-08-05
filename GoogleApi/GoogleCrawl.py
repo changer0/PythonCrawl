@@ -62,7 +62,7 @@ def requestGoolgeToJSon(target, debug):
     # print(soup.find('div', id = 'rso'))
     list = []
     result['list'] = list
-    listIndex = 0
+
     # 查询所有搜索结果
     for s in soup.find_all('div', class_='tF2Cxc'):
         s1 = s.find('div', class_='yuRUbf')
@@ -74,17 +74,10 @@ def requestGoolgeToJSon(target, debug):
         # print("是否展示时间: " + str(hasShowTime))
         description = ""
         showTime = ""
-        ddIndex = 0
+
         for dd in d:
             s = str(dd.strip().replace("\n", "").replace("  ", ""))
-            if hasShowTime:
-                if ddIndex == 0:
-                    showTime = s
-                else:
-                    description = s
-            else:
-                description = s
-            ddIndex = ddIndex + 1
+            description += s
         
         itemData = {
             'title': s1.a.h3.string.strip(),
