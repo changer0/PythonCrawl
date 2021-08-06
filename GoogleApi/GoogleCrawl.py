@@ -72,24 +72,24 @@ def requestGoolgeToJSon(target, startIndex, debug):
         s1 = s.find('div', class_='yuRUbf')
         s2 = s.find('div', class_='IsZvec')
         
-        d = s2.div.stripped_strings
-        
-        hasShowTime = (s2.div.span != None)
-        # print("是否展示时间: " + str(hasShowTime))
-        description = ""
-        showTime = ""
+        try:
+            d = s2.div.stripped_strings
+            description = ""
+            showTime = ""
 
-        for dd in d:
-            s = str(dd.strip().replace("\n", "").replace("  ", ""))
-            description += s
-        
-        itemData = {
-            'title': s1.a.h3.string.strip(),
-            'url': s1.a['href'],
-            'description': description,
-            'showTime': showTime
-        }
-        list.append(itemData)
+            for dd in d:
+                s = str(dd.strip().replace("\n", "").replace("  ", ""))
+                description += s
+            
+            itemData = {
+                'title': s1.a.h3.string.strip(),
+                'url': s1.a['href'],
+                'description': description,
+                'showTime': showTime
+            }
+            list.append(itemData)
+        except:
+            print("reslut 解析失败")    
     # 找到搜索结果
     # result = str(soup.select('#search')).lstrip('[').rstrip(']')
     # 写入测试文件
