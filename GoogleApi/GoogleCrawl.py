@@ -39,7 +39,7 @@ def requestGoolge(target, debug):
     return result
 
 # 以 JSON 格式吐出数据
-def requestGoolgeToJSon(target, debug): 
+def requestGoolgeToJSon(target, startIndex, debug): 
     new_headers = {
        "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.40 Safari/537.36 Edg/89.0.774.23"
     }
@@ -50,15 +50,19 @@ def requestGoolgeToJSon(target, debug):
         f.close()
     else:
         # hl 界面语言 
-        r = requests.get("https://www.google.com.hk/search?hl=zh-CN&q=" + target, headers = new_headers)
+        # r = requests.get("https://www.google.com.hk/search?hl=zh-CN&q=" + target + "&start=" + startIndex, headers = new_headers)
+        r = requests.get("https://www.google.com.hk/search?hl=zh-CN&q=" + target + "&start=" + startIndex, headers = new_headers)
         htmlRes = r.text
 
     soup = BeautifulSoup(htmlRes, "html.parser")
     result = {}
     # 查找搜索耗时
-    time = soup.find('div', id='result-stats').nobr.string.lstrip().lstrip('（').rstrip().rstrip('）')
-    result['time_consuming'] = time
-
+    try:
+        time = soup.find('div', id='result-stats').nobr.string.lstrip().lstrip('（').rstrip().rstrip('）')
+        result['time_consuming'] = time
+    except:
+        print("time 解析失败")
+    
     # print(soup.find('div', id = 'rso'))
     list = []
     result['list'] = list

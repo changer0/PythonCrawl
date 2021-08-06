@@ -14,12 +14,13 @@ import GoogleCrawl
 def main_handler(event, context):
     _params = event['queryString']
     target = _params['q']
-    r = GoogleCrawl.requestGoolge(target, False)
+    start = _params['start']
+    r = GoogleCrawl.requestGoolgeToJSon(target, start, False)
     # r.text
     result = { 
         "isBase64Encoded":False,
         "statusCode": 200,
-        "headers": {"Content-Type":"text/html"},
+         "headers": {"Content-Type":"text/html", "Access-Control-Allow-Origin":"*"},
         "body": r
     }
     return result
